@@ -84,6 +84,17 @@ class Greeklish {
 
     Runes inputToken = greekWord.runes;
 
+    bool hasGreekValues = inputToken.any((rune) {
+      String greekChar = String.fromCharCode(rune);
+
+      greekChar =
+          ACCENTS.containsKey(greekChar) ? ACCENTS[greekChar] : greekChar;
+
+      return CONVERT_STRINGS.containsKey(greekChar);
+    });
+
+    if (!hasGreekValues) return [greekWord];
+
     inputToken.forEach((rune) {
       String greekChar = String.fromCharCode(rune);
       greekChar =
