@@ -75,7 +75,7 @@ class Greeklish {
     "ω": ["w", "o", "v"]
   };
 
-  static List generate(String greekWord) {
+  static List<String> generate(String greekWord) {
     List<String> greeklishVersion = List();
 
     DIGRAPH_CASES.forEach((key, value) {
