@@ -67,6 +67,7 @@ class Greeklish {
     "π": ["p"],
     "ρ": ["r"],
     "σ": ["s"],
+    "ς": ["s"],
     "τ": ["t"],
     "υ": ["y", "u", "i"],
     "φ": ["f", "ph"],
@@ -75,50 +76,54 @@ class Greeklish {
     "ω": ["w", "o", "v"]
   };
 
-  static List<String> generate(String greekWord) {
-    List<String> greeklishVersion = List();
+  static bool _isGreekChar(String char) =>
+      CONVERT_STRINGS[ACCENTS[char] ?? char] != null;
 
-    DIGRAPH_CASES.forEach((key, value) {
-      greekWord = greekWord.replaceAll(key, value);
-    });
+  static bool _containsGreekChars(String word) => word.runes.any((r) {
+        String char = String.fromCharCode(r);
+        return _isGreekChar(char);
+      });
 
-    Runes inputToken = greekWord.runes;
+  static List<String> _buildGreeklishVersions(String char) =>
+      !_isGreekChar(char) ? [char] : CONVERT_STRINGS[char];
 
-    bool hasGreekValues = inputToken.any((rune) {
-      String greekChar = String.fromCharCode(rune);
+  static List<String> generate(String word) {
+    // we work with the lowercase version
+    word = word.toLowerCase();
 
-      greekChar =
-          ACCENTS.containsKey(greekChar) ? ACCENTS[greekChar] : greekChar;
+    // if word does not contain any greek chars then stop
+    if (!_containsGreekChars(word)) return [word];
 
-      return CONVERT_STRINGS.containsKey(greekChar);
-    });
+    // replace accents
+    ACCENTS.forEach((key, value) => word = word.replaceAll(key, value));
 
-    if (!hasGreekValues) return [greekWord];
+    // replace digraphs
+    DIGRAPH_CASES.forEach((key, value) => word = word.replaceAll(key, value));
 
-    inputToken.forEach((rune) {
-      String greekChar = String.fromCharCode(rune);
-      greekChar =
-          ACCENTS.containsKey(greekChar) ? ACCENTS[greekChar] : greekChar;
+    List<String> wordVersions = List();
 
-      if (CONVERT_STRINGS.containsKey(greekChar)) {
-        if (greeklishVersion.isEmpty) {
-          CONVERT_STRINGS[greekChar].forEach((conversionStrings) {
-            greeklishVersion.add(conversionStrings);
-          });
-        } else {
-          List<String> newTokens = [];
-          CONVERT_STRINGS[greekChar].forEach((conversionString) {
-            greeklishVersion.forEach((token) {
-              newTokens.add("$token$conversionString");
-            });
-          });
+    // generate words from all possible rune conversions
+    Runes wordRunes = word.runes;
+    for (var rune in wordRunes) {
+      String char = String.fromCharCode(rune);
 
-          greeklishVersion = newTokens;
-        }
+      if (wordVersions.isEmpty) {
+        _buildGreeklishVersions(char).forEach(
+          (version) => wordVersions.add(version),
+        );
       } else {
-        greeklishVersion.add(greekChar);
+        List<String> newTokens = [];
+
+        _buildGreeklishVersions(char).forEach(
+          (version) => wordVersions.forEach(
+            (token) => newTokens.add("$token$version"),
+          ),
+        );
+
+        wordVersions = newTokens;
       }
-    });
-    return greeklishVersion;
+    }
+
+    return wordVersions;
   }
 }
