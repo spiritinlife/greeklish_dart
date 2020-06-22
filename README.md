@@ -1,6 +1,6 @@
 # Greeklish Generator
 
-Transforms a word into greeklish versions.
+Transforms a greek word into greeklish versions.
 
 
 ## Getting Started
@@ -32,8 +32,8 @@ Does not preserve the case of the input word. All generated words will be in low
 
 
 # TODO
- - [] Preserve case
- - [] Add stemming ( plurals and such https://github.com/skroutz/greeklish/blob/master/lib/greeklish/greek_reverse_stemmer.rb )
+ - [ ] Preserve case
+ - [ ] Add stemming ( plurals and such https://github.com/skroutz/greeklish/blob/master/lib/greeklish/greek_reverse_stemmer.rb )
 
 ## Inspiration
 
