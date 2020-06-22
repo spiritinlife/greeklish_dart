@@ -1,7 +1,6 @@
 name: greeklish
 description: Greeklish Generator
 version: 0.0.1
-author: George Chailazopoulos
 homepage: https://github.com/spiritinlife/greeklish_dart
 
 environment:
