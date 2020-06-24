@@ -1,11 +1,11 @@
 name: greeklish
-description: Greeklish Generator
-version: 0.0.1
+description: Given a greek work will generate greeklish versions. Helpful for doing client searching and want to support greeklish input.
+version: 0.0.2
 homepage: https://github.com/spiritinlife/greeklish_dart
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.4.0 <3.0.0"
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  test: ^1.3.0
+  pedantic: ^1.0.0

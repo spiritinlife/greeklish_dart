@@ -1,9 +1,9 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:greeklish/greeklish.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('tests', () {
-    expect(Greeklish.generate("αυτοκινητο"), [
+    expect(GreeklishGenerator.generate("αυτοκινητο"), [
       "autokinhto",
       "aftokinhto",
       "avtokinhto",
@@ -15,7 +15,7 @@ void main() {
     ]);
 
     expect(
-      Greeklish.generate("ομπρΈΛα"),
+      GreeklishGenerator.generate("ομπρΈΛα"),
       [
         "omprela",
         "obrela",
@@ -23,28 +23,28 @@ void main() {
     );
 
     expect(
-      Greeklish.generate("ξεσκεπαστοσ"),
+      GreeklishGenerator.generate("ξεσκεπαστοσ"),
       [
         "kseskepastos",
         "xeskepastos",
       ],
     );
 
-    expect(Greeklish.generate("ομορφος"), [
+    expect(GreeklishGenerator.generate("ομορφος"), [
       "omorfos",
       "omorphos",
     ]);
 
-    expect(Greeklish.generate("ομorφos"), [
+    expect(GreeklishGenerator.generate("ομorφos"), [
       "omorfos",
       "omorphos",
     ]);
 
-    expect(Greeklish.generate("hello"), [
+    expect(GreeklishGenerator.generate("hello"), [
       "hello",
     ]);
 
-    expect(Greeklish.generate("εντεχνο"), [
+    expect(GreeklishGenerator.generate("εντεχνο"), [
       "entexno",
       "edexno",
       "entehno",
@@ -52,7 +52,8 @@ void main() {
       "entechno",
       "edechno",
     ]);
-    expect(Greeklish.generate("έντεχνο"), [
+
+    expect(GreeklishGenerator.generate("έντεχνο"), [
       "entexno",
       "edexno",
       "entehno",
@@ -60,9 +61,13 @@ void main() {
       "entechno",
       "edechno",
     ]);
-    expect(Greeklish.generate("eε"), ["ee"]);
-    expect(Greeklish.generate("ee"), ["ee"]);
-    expect(Greeklish.generate("ντ"), ['nt', 'd']);
-    expect(Greeklish.generate("τζαζ"), ['tzaz']);
+
+    expect(GreeklishGenerator.generate("eε"), ["ee"]);
+
+    expect(GreeklishGenerator.generate("ee"), ["ee"]);
+
+    expect(GreeklishGenerator.generate("ντ"), ['nt', 'd']);
+
+    expect(GreeklishGenerator.generate("τζαζ"), ['tzaz']);
   });
 }
