@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.2] - 24/06/2020
 
-* TODO: Describe initial release.
+* Fix linter issues
+
+## [0.0.1] - 20/06/2020
+
+* Initial release
