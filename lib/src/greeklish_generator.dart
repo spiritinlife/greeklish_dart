@@ -33,6 +33,7 @@ class GreeklishGenerator {
     'ί': 'ι',
     'ό': 'ο',
     'ύ': 'υ',
+    'ώ': 'ω',
   };
 
   // The possible string conversions for each case.
