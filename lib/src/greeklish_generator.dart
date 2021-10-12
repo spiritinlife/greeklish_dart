@@ -102,9 +102,10 @@ class GreeklishGenerator {
     // generate words from all possible rune conversions
     for (final int rune in word.runes) {
       if (wordVariations.isEmpty) {
-        _produceGreeklishVeriations(rune).forEach(
-          (greeklishVariation) => wordVariations.add(greeklishVariation),
-        );
+        for (final String greeklishVariation
+            in _produceGreeklishVeriations(rune)) {
+          wordVariations.add(greeklishVariation);
+        }
       } else {
         final List<String> newTokens = [];
 
@@ -134,5 +135,5 @@ class GreeklishGenerator {
   static List<String> _produceGreeklishVeriations(int charCode) =>
       !_isGreekChar(charCode)
           ? [String.fromCharCode(charCode)]
-          : _CONVERT_STRINGS[String.fromCharCode(charCode)];
+          : _CONVERT_STRINGS[String.fromCharCode(charCode)] ?? [];
 }
